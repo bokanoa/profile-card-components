@@ -1,7 +1,14 @@
-$platforms : (
-    mobile: 480px,
-    tablet: 796px,
-    desktop: 1440px
+//variables
+$font-size: 18px;   //name and stats
+$dark-grey: hsl(0, 0%, 59%);
+$dark-cyan: hsl(185, 75%, 39%);
+$very-dark-blue: hsl(229, 23%, 23%);
+$dark-blue: hsl(227, 10%, 46%);
+
+$platforms: (
+    mobile  : 375px,
+    tablet: 780px,
+    desktop : 1440px,
 );
 
 @mixin query($screen){
@@ -14,182 +21,98 @@ $platforms : (
     }
 }
 
-
-//Primary Colors
-$bright-orange: hsl(31, 77%, 52%);
-$dark-cyan : hsl(184, 100%, 22%);
-$very-dark-cyan: hsl(179, 100%, 13%);
-
-//Neutral
-$transparent-white : hsla(0, 0%, 100%, 0.75);
-$very-light-grey: hsl(0, 0%, 95%);
-
-//font-size
-$font-size: 1.5rem;
-
 * {
     margin: 0;
     padding: 0;
-}
-
-*, 
-*::before,
-*::after {
-    box-sizing: inherit;
-}
-
-html {
     box-sizing: border-box;
-    font-size: 62.5%;
 }
 
 body {
-    font-size: 1.5rem;  // 10px/16px = 62.5% 
-    font-family: 'Lexend Deca';
-    font-weight: 400;
-    color: #FFF;
+    font-family: 'Kumbh Sands', sans-serif;
+    font-weight: 700;
+    background: $dark-cyan;
+    height: 100vh;
+    overflow: hidden;
 }
 
-.container {
-    margin: 20vh auto;
-    width: 70vw;
-    height: 60vh;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 100%;
-    
-    .block-1 {
-        background-color: $bright-orange;
-        border-top-left-radius: 10px;
-        border-bottom-left-radius: 10px;
-    }
-    .block-2 {
-        background-color: $dark-cyan;
-    }
-    .block-3 {
-        background-color:$very-dark-cyan;
-        border-top-right-radius: 10px;
-        border-bottom-right-radius: 10px;
-    }
+.top-bg, .bottom-bg { position: absolute;}
+.top-bg { transform: translate(-38%, -55%);}
+.bottom-bg { 
+    bottom:0;
+    right: 0;
+    transform: translate(35%, 65%); 
+}
+section {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    .profile {
+        width: 350px;
+        border-radius: 10px;
+        background-color: #FFF;
+        overflow: hidden;
+        text-align: center;
 
-    [class ^="block-"]{
-        padding: 10%;
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr 3fr 1fr;
-        align-items: center;
-    }
-    .box-2 h2 {
-        text-transform: uppercase;
-        font-family: 'Lexend Deca';
-        font-weight: 700;
-    }
-
-    .box-3 {
-        align-self: flex-start;
-    }
-    
-    .box-3 p {
-        color: $transparent-white;
-        line-height: 1.6;
-        font-size: 1.65rem;
-    }
-    .box-4 {
-        align-self: flex-end;
-    }
-    .box-4 .btn {
-        display: inline-block;
-        padding: 10px 15px;
-        background-color: #fff;
-        text-decoration: none;
-        outline: none;
-        border:none;
-        border-radius: 20px;
-    }
-    .block-1 .box-4 .btn {
-        color: $bright-orange;
-        &:hover {
-            background-color: $bright-orange;
-            color: #fff;
-            border: 1px solid #FFF;
+        .top {
+            background-image: url('../img/bg-pattern-card.svg');
+            background-size: cover;
+            height: 135px;
         }
-    }
-    .block-2 .box-4 .btn {
-        color: $dark-cyan;
-        &:hover {
-            background-color: $dark-cyan;
-            color: #fff;
-            border: 1px solid #fff;
+        .content {
+            flex: 1;
+            padding: 20px;
+            border-bottom: 1px solid rgba(105, 105, 105, 0.26);
+            .profile-img {
+                width: 100px;
+                height: 100px;
+                border: 5px solid #FFF;
+                margin: -50px auto 25px;
+                overflow: hidden;
+                border-radius: 50%;
+            }
+            .info {
+                margin-bottom: 8px;
+            }
+            .info h4 {
+                color: hsl(0, 1%, 26%);
+                span {
+                    color: $dark-grey;    
+                }
+            }
+            .city h5 {
+                font-size: 1rem;
+                color: $dark-grey;
+                font-weight: 400;
+                margin: 0;
+            }
         }
-    }
-    .block-3 .box-4 .btn {
-        color: $very-dark-cyan;
-        &:hover {
-            background-color: $very-dark-cyan;
-            color: #fff;
-            border: 1px solid #fff;
+        .bottom {
+            display: flex;
+            justify-content: space-evenly;
+            align-items:center;
+            padding: 20px 0;
+            [class ^="box-"]{
+                .value{
+                    color: hsl(0, 1%, 26%);
+                }
+                .desc {
+                    font-size: 0.5rem;
+                    margin-top: 8px;
+                    letter-spacing: 0.1rem;
+                    color: $dark-grey;
+                }
+            }
         }
     }
 }
 
-// For tablets
-@include query(tablet){
-
-    .container {
-        margin: 10vh auto;
-        width: 70vw;
-        height: (100vh - 20vh);
-        [class ^="block-"]{
-            font-size: 1.2rem;
-            padding: 10%;
-        }
-        .box-3 p {
-            font-size: 1.2rem;
-        }
-        .box-4 .btn {
-            display: inline-block;
-            padding: 8px 12px;
-            background-color: #fff;
-            text-decoration: none;
-            outline: none;
-            border:none;
-            border-radius: 20px;
-            font-size: 1.2rem;
-        }
-    }
-}
-
-//for mobile
 @include query(mobile){
-    .container {
-        margin: 3vh auto;
-        width: 80vw;
-        height: 94vh;
-        grid-template-rows: repeat(3, 1fr);
-        grid-template-columns: 100%;
-
-        [class ^="block-"]{
-            padding: 5%;
-            grid-template-rows: 1fr 1fr 2fr 1fr;
-        }
-
-        .block-1 {
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            border-bottom-left-radius: 0px;
-        }
-
-        .block-3 {
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-            border-top-right-radius: 0;
-        }
+    .top-bg {
+        transform: translate(-75%, -55%);
+    }
+    .bottom-bg{
+        transform: translate(66%, 70%);
     }
 }
-
-
-
-
-
-
-
